@@ -26,3 +26,7 @@ run/5:
 ## run/6: run the memory-agent with persistent database storage
 run/6:
 	go run 6-persistent-storage/memory_agent/main.go
+
+## run/7: run the multi-agent manager system with specialized agents
+run/7:
+	go run 7-multi-agent/manager_agent/main.go web api webui
