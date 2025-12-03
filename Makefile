@@ -1,0 +1,28 @@
+## help: print this help message
+help:
+	@echo 'Usage:'
+	@sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' | sed -e 's/^/ /'
+
+## run/1: run the basic-agent
+run/1:
+	go run 1-basic-agent/greeting_agent/main.go web api webui
+
+## run/2: run the tool-agent
+run/2:
+	go run 2-tool-agent/tool_agent/main.go web api webui
+
+## run/3: run the dad-joke-agent (uses Gemini, not LiteLLM)
+run/3:
+	go run 3-litellm-agent/dad_joke_agent/main.go web api webui
+
+## run/4: run the email-agent with structured outputs
+run/4:
+	go run 4-structured-outputs/email_agent/main.go web api webui
+
+## run/5: run the question-answering-agent with sessions and state
+run/5:
+	go run 5-sessions-and-state/question_answering_agent/main.go
+
+## run/6: run the memory-agent with persistent database storage
+run/6:
+	go run 6-persistent-storage/memory_agent/main.go
