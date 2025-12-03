@@ -14,6 +14,7 @@ import (
 	"google.golang.org/genai"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 
 	"google.golang.org/adk/agent"
 	"google.golang.org/adk/agent/llmagent"
@@ -185,10 +186,10 @@ func deleteReminder(ctx tool.Context, input deleteReminderArgs) (deleteReminderR
 		state.Set("reminders", reminders)
 
 		return deleteReminderResults{
-			Action:  "delete_reminder",
-			Index:   input.Index,
+			Action:          "delete_reminder",
+			Index:           input.Index,
 			DeletedReminder: deletedReminder,
-			Message: fmt.Sprintf("Deleted reminder %d: '%s'", input.Index, deletedReminder),
+			Message:         fmt.Sprintf("Deleted reminder %d: '%s'", input.Index, deletedReminder),
 		}, nil
 	}
 
@@ -239,7 +240,6 @@ func getRemindersList(state session.ReadonlyState) []string {
 	}
 	return reminders
 }
-
 
 func displayState(sessionService session.Service, appName, userID, sessionID, label string) {
 	ctx := context.Background()
@@ -308,7 +308,10 @@ func main() {
 	// Create database session service with SQLite
 	sessionService, err := database.NewSessionService(
 		sqlite.Open(DB_FILE),
-		&gorm.Config{PrepareStmt: true},
+		&gorm.Config{
+			PrepareStmt: true,
+			Logger:      logger.Default.LogMode(logger.Silent),
+		},
 	)
 	if err != nil {
 		log.Fatalf("Failed to create database session service: %v", err)

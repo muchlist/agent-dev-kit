@@ -30,3 +30,7 @@ run/6:
 ## run/7: run the multi-agent manager system with specialized agents
 run/7:
 	go run 7-multi-agent/manager_agent/main.go web api webui
+
+## run/8: run the stateful multi-agent customer service system
+run/8:
+	go run 8-stateful-multi-agent/customer_service_agent/main.go web api webui
