@@ -54,3 +54,7 @@ run/10:
 ## run/11: run the system monitor parallel agent
 run/11:
 	go run 11-parallel-agent/system_monitor_agent/main.go web api webui
+
+## run/12: run the LinkedIn post generator loop agent
+run/12:
+	go run 12-loop-agent/linkedin_post_agent/main.go web api webui
