@@ -46,3 +46,7 @@ run/9b:
 ## run/9c: run the before/after tool callbacks example
 run/9c:
 	go run 9-callbacks/before_after_tool/main.go web api webui
+
+## run/10: run the lead qualification sequential agent
+run/10:
+	go run 10-sequential-agent/lead_qualification_agent/main.go web api webui
