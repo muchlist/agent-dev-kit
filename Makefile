@@ -34,3 +34,15 @@ run/7:
 ## run/8: run the stateful multi-agent customer service system
 run/8:
 	go run 8-stateful-multi-agent/customer_service_agent/main.go web api webui
+
+## run/9a: run the before/after agent callbacks example
+run/9a:
+	go run 9-callbacks/before_after_agent/main.go web api webui
+
+## run/9b: run the before/after model callbacks example
+run/9b:
+	go run 9-callbacks/before_after_model/main.go web api webui
+
+## run/9c: run the before/after tool callbacks example
+run/9c:
+	go run 9-callbacks/before_after_tool/main.go web api webui
