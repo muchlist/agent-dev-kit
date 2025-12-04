@@ -50,3 +50,7 @@ run/9c:
 ## run/10: run the lead qualification sequential agent
 run/10:
 	go run 10-sequential-agent/lead_qualification_agent/main.go web api webui
+
+## run/11: run the system monitor parallel agent
+run/11:
+	go run 11-parallel-agent/system_monitor_agent/main.go web api webui
