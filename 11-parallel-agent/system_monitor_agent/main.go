@@ -44,36 +44,29 @@ func main() {
 		log.Fatalf("Failed to create model: %v", err)
 	}
 
-	fmt.Println("🖥️  Creating System Monitor Parallel Agent...")
-
 	// Create sub-agents for parallel system information gathering
 	cpuInfoAgent, err := agents.NewCPUInfoAgent(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create CPU info agent: %v", err)
 	}
-	fmt.Println("  ✓ CPU Info Agent created")
 
 	memoryInfoAgent, err := agents.NewMemoryInfoAgent(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create memory info agent: %v", err)
 	}
-	fmt.Println("  ✓ Memory Info Agent created")
 
 	diskInfoAgent, err := agents.NewDiskInfoAgent(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create disk info agent: %v", err)
 	}
-	fmt.Println("  ✓ Disk Info Agent created")
 
 	// Create report synthesizer agent
 	reportSynthesizer, err := agents.NewSystemReportSynthesizer(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create report synthesizer agent: %v", err)
 	}
-	fmt.Println("  ✓ System Report Synthesizer created")
 
 	// Create Parallel Agent for concurrent system information gathering
-	fmt.Println("⚡ Creating Parallel Information Gatherer...")
 	parallelInfoGatherer, err := parallelagent.New(parallelagent.Config{
 		AgentConfig: agent.Config{
 			Name:        "system_info_gatherer",
@@ -84,10 +77,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create parallel info gatherer: %v", err)
 	}
-	fmt.Println("  ✓ Parallel Information Gatherer created")
 
 	// Create Sequential Agent for the overall workflow
-	fmt.Println("🔗 Creating Sequential Pipeline...")
 	sequentialAgent, err := sequentialagent.New(sequentialagent.Config{
 		AgentConfig: agent.Config{
 			Name:        "system_monitor_agent",
@@ -98,7 +89,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create system monitor sequential agent: %v", err)
 	}
-	fmt.Println("  ✓ System Monitor Sequential Agent created")
 
 	fmt.Println("\n🚀 Launching System Monitor Parallel Agent...")
 	fmt.Println("========================================================")

@@ -137,44 +137,34 @@ func main() {
 		log.Fatalf("Failed to create model: %v", err)
 	}
 
-	fmt.Println("🤖 Creating specialized agents...")
-
 	// Create all specialized agents
 	policyAgent, err := agents.NewPolicyAgent(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create policy agent: %v", err)
 	}
-	fmt.Println("  ✓ Policy Agent created")
 
 	salesAgent, err := agents.NewSalesAgent(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create sales agent: %v", err)
 	}
-	fmt.Println("  ✓ Sales Agent created")
 
 	courseSupportAgent, err := agents.NewCourseSupportAgent(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create course support agent: %v", err)
 	}
-	fmt.Println("  ✓ Course Support Agent created")
 
 	orderAgent, err := agents.NewOrderAgent(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create order agent: %v", err)
 	}
-	fmt.Println("  ✓ Order Agent created")
 
 	// Create customer service manager agent
-	fmt.Println("🎯 Creating customer service manager agent...")
 	customerServiceAgent, err := createCustomerServiceAgent(ctx, model, policyAgent, salesAgent, courseSupportAgent, orderAgent)
 	if err != nil {
 		log.Fatalf("Failed to create customer service agent: %v", err)
 	}
-	fmt.Println("  ✓ Customer Service Agent created")
 
 	// ===== Session Management Setup =====
-
-	fmt.Println("\n📦 Setting up session management...")
 
 	// Create database session service with SQLite
 	// This properly persists state changes made by tools
@@ -193,8 +183,6 @@ func main() {
 	if err := database.AutoMigrate(sessionService); err != nil {
 		log.Fatalf("Failed to auto-migrate database: %v", err)
 	}
-
-	fmt.Println("✅ Connected to database:", DB_FILE)
 
 	// Wrap session service to provide default initial state for new sessions
 	initialState := map[string]any{
@@ -233,7 +221,7 @@ type sessionServiceWithDefaults struct {
 // Create wraps the Create method to ensure initial state is set
 func (s *sessionServiceWithDefaults) Create(ctx context.Context, req *session.CreateRequest) (*session.CreateResponse, error) {
 	// If no state provided, use initial state
-	if req.State == nil || len(req.State) == 0 {
+	if len(req.State) == 0 {
 		req.State = s.initialState
 	}
 	return s.Service.Create(ctx, req)

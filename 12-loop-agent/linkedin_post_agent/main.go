@@ -48,30 +48,24 @@ func main() {
 		log.Fatalf("Failed to create model: %v", err)
 	}
 
-	fmt.Println("📝 Creating LinkedIn Post Generator with Iterative Refinement...")
-
 	// Create sub-agents for the refinement loop
 	postReviewer, err := agents.NewPostReviewer(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create post reviewer agent: %v", err)
 	}
-	fmt.Println("  ✓ Post Reviewer agent created")
 
 	postRefiner, err := agents.NewPostRefiner(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create post refiner agent: %v", err)
 	}
-	fmt.Println("  ✓ Post Refiner agent created")
 
 	// Create initial post generator
 	initialPostGenerator, err := agents.NewInitialPostGenerator(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create initial post generator agent: %v", err)
 	}
-	fmt.Println("  ✓ Initial Post Generator agent created")
 
 	// Create Loop Agent for iterative refinement
-	fmt.Println("🔄 Creating Refinement Loop...")
 	refinementLoop, err := loopagent.New(loopagent.Config{
 		MaxIterations: 8,
 		AgentConfig: agent.Config{
@@ -83,10 +77,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create refinement loop agent: %v", err)
 	}
-	fmt.Println("  ✓ Refinement Loop created (max 10 iterations)")
 
 	// Create Sequential Agent for overall pipeline
-	fmt.Println("🔗 Creating Sequential Pipeline...")
 	sequentialAgent, err := sequentialagent.New(sequentialagent.Config{
 		AgentConfig: agent.Config{
 			Name:        "LinkedInPostGenerationPipeline",
@@ -97,7 +89,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create LinkedIn post generation pipeline: %v", err)
 	}
-	fmt.Println("  ✓ LinkedIn Post Generation Pipeline created")
 
 	fmt.Println("\n🚀 Launching LinkedIn Post Generator with Loop Agent...")
 	fmt.Println("========================================================")

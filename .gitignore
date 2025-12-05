@@ -4,4 +4,6 @@ __pycache__/
 *.db
 .claude
 
+# temoprary ignore
 python/
+13-legal-rag-agent/

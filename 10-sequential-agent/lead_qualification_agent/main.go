@@ -44,26 +44,21 @@ func main() {
 		log.Fatalf("Failed to create model: %v", err)
 	}
 
-	fmt.Println("🏢 Creating Lead Qualification Sequential Pipeline...")
-
 	// Create sub-agents for the sequential workflow
 	validator, err := agents.NewLeadValidator(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create lead validator agent: %v", err)
 	}
-	fmt.Println("  ✓ Lead Validator agent created")
 
 	scorer, err := agents.NewLeadScorer(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create lead scorer agent: %v", err)
 	}
-	fmt.Println("  ✓ Lead Scorer agent created")
 
 	recommender, err := agents.NewActionRecommender(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create action recommender agent: %v", err)
 	}
-	fmt.Println("  ✓ Action Recommender agent created")
 
 	// Create the sequential agent using ADK SequentialAgent
 	fmt.Println("🔗 Creating Sequential Agent...")
@@ -77,7 +72,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create lead qualification sequential agent: %v", err)
 	}
-	fmt.Println("  ✓ Lead Qualification Sequential Agent created")
 
 	fmt.Println("\n🚀 Launching Lead Qualification Sequential Agent...")
 	fmt.Println("========================================================")

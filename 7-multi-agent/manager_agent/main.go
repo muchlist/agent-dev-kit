@@ -98,34 +98,27 @@ func main() {
 		log.Fatalf("Failed to create model: %v", err)
 	}
 
-	fmt.Println("🤖 Creating specialized agents...")
-
 	// Create specialized agents using modular agent constructors
 	stockAnalyst, err := agents.NewStockAnalyst(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create stock analyst agent: %v", err)
 	}
-	fmt.Println("  ✓ Stock Analyst agent created")
 
 	funnyNerd, err := agents.NewFunnyNerd(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create funny nerd agent: %v", err)
 	}
-	fmt.Println("  ✓ Funny Nerd agent created")
 
 	newsAnalyst, err := agents.NewNewsAnalyst(ctx, model)
 	if err != nil {
 		log.Fatalf("Failed to create news analyst agent: %v", err)
 	}
-	fmt.Println("  ✓ News Analyst agent created")
 
 	// Create manager agent that coordinates all specialized agents
-	fmt.Println("🎯 Creating manager agent...")
 	managerAgent, err := createManagerAgent(ctx, model, stockAnalyst, funnyNerd, newsAnalyst)
 	if err != nil {
 		log.Fatalf("Failed to create manager agent: %v", err)
 	}
-	fmt.Println("  ✓ Manager agent created")
 
 	fmt.Println("\n🚀 Launching Multi-Agent System...")
 	fmt.Println("========================================")
