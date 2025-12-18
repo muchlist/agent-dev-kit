@@ -22,8 +22,8 @@ The Agent Development Kit (ADK) is Google's framework for building LLM-powered a
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd agent-development-kit-crash-course
+git clone [<repository-url>](https://github.com/muchlist/agent-dev-kit)
+cd agent-dev-kit
 ```
 
 ### 2. Set Up Environment
